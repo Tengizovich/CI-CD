@@ -1,0 +1,72 @@
+stages:
+  - build
+  - test
+  - deploy
+  - pages
+
+image: alpine
+
+
+build_job:
+  stage: build
+  script:
+    - echo "Building the project..."
+  artifacts:
+    paths:
+      - path/to/artifact
+    exclude:
+      - path/to/artifact/excluded_file.txt
+
+
+test_job:
+  stage: test
+  script:
+    - echo "Running tests..."
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Deploying the project..."
+
+pages_job:
+  stage: deploy
+  script:
+    - echo "Deploying static websites..."
+  artifacts:
+    paths:
+      - public/
+  only:
+    - main
+
+create_file_job:
+  stage: build
+  script:
+    - echo "Creating the file..."
+  artifacts:
+    paths:
+      - path/to/file.txt
+
+test_file_job:
+  stage: test
+  script:
+    - echo "Testing the file..."
+
+delete_file_job:
+  stage: deploy
+  script:
+    - echo "Deleting the file..."
+
+pages:
+  stage: deploy
+  script:
+    - echo 'Publishing website to GitLab Pages'
+
+  artifacts:
+    paths:
+      - public/
+    exclude:
+      - public/example.txt
+
+
+
+
